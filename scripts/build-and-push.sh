@@ -42,13 +42,10 @@ suffix=$(git rev-parse --short HEAD)
 
 docker pull node:12
 
-latestTag="${NAME}:latest"
-tag="${NAME}:${suffix}"
-
-echo "Building and pushing ${tag}"
-
 latestTag="gcr.io/${CLOUDSDK_CORE_PROJECT}/${NAME}:latest"
 tag="gcr.io/${CLOUDSDK_CORE_PROJECT}/${NAME}:${PACKAGE_VERSION}${suffix}"
+
+echo "Building and pushing ${tag}"
 
 docker build -t ${tag} -t ${latestTag} .
 docker push ${tag}
