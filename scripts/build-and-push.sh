@@ -45,3 +45,5 @@ echo "Building and pushing ${tag}"
 docker build -t ${tag} -t ${latestTag} .
 docker push ${tag}
 docker push ${latestTag}
+
+gcloud run deploy subprocess --image "${NAME}:${suffix}" --concurrency=1 --cpu=1 --memory=2048Mi --timeout=60 --platform=managed --port=3000 --allow-unauthenticated
