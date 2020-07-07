@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
+if [[ -z "$CLOUDSDK_CORE_PROJECT" ]]; then
+    echo "Must provide CLOUDSDK_CORE_PROJECT in environment" 1>&2
+    exit 1
+fi
+
 require_clean_work_tree () {
     # Update the index
     git update-index -q --ignore-submodules --refresh
@@ -42,8 +47,11 @@ tag="${NAME}:${suffix}"
 
 echo "Building and pushing ${tag}"
 
+latestTag="gcr.io/${CLOUDSDK_CORE_PROJECT}/${NAME}:latest"
+tag="gcr.io/${CLOUDSDK_CORE_PROJECT}/${NAME}:${PACKAGE_VERSION}${suffix}"
+
 docker build -t ${tag} -t ${latestTag} .
 docker push ${tag}
 docker push ${latestTag}
 
-gcloud run deploy subprocess --image "docker.io/${NAME}:${suffix}" --concurrency=1 --cpu=1 --memory=2048Mi --timeout=60 --platform=managed --port=3000 --allow-unauthenticated
+gcloud run deploy subprocess --image "${tag}" --concurrency=1 --cpu=1 --memory=2048Mi --timeout=60 --platform=managed --port=3000 --allow-unauthenticated
