@@ -29,7 +29,7 @@ require_clean_work_tree () {
     fi
 }
 
-#require_clean_work_tree
+require_clean_work_tree
 
 PACKAGE_VERSION=$(cat package.json | jq .version -r)
 NAME="ehacke/subprocess"
@@ -46,4 +46,4 @@ docker build -t ${tag} -t ${latestTag} .
 docker push ${tag}
 docker push ${latestTag}
 
-gcloud run deploy subprocess --image "${NAME}:${suffix}" --concurrency=1 --cpu=1 --memory=2048Mi --timeout=60 --platform=managed --port=3000 --allow-unauthenticated
+gcloud run deploy subprocess --image "docker.io/${NAME}:${suffix}" --concurrency=1 --cpu=1 --memory=2048Mi --timeout=60 --platform=managed --port=3000 --allow-unauthenticated
