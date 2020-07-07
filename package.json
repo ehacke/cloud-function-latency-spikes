@@ -1,0 +1,51 @@
+{
+  "name": "cloud-run-vs-cloud-functions-processes",
+  "description": "How child processes are handled in Cloud Run compared to Cloud Functions",
+  "version": "0.0.1",
+  "author": "Eric Hacke",
+  "bugs": {
+    "url": "https://github.com/ehacke/cloud-run-vs-cloud-functions-processes/issues"
+  },
+  "devDependencies": {
+    "@ehacke/eslint-config": "^1.1.6",
+    "@ehacke/prettier-config": "^1.0.2",
+    "@typescript-eslint/eslint-plugin": "^3.4.0",
+    "@typescript-eslint/parser": "^3.4.0",
+    "eslint": "7.2.0",
+    "eslint-import-resolver-typescript": "^2.0.0",
+    "eslint-plugin-simple-import-sort": "^5.0.3",
+    "fixpack": "^3.0.6",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5",
+    "prettier-eslint-cli": "^5.0.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5"
+  },
+  "homepage": "https://github.com/ehacke/cloud-run-vs-cloud-functions-processes#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "license": "MIT",
+  "lint-staged": {
+    "package.json": [
+      "fixpack"
+    ],
+    "*.{js,ts}": [
+      "prettier-eslint --write",
+      "eslint --fix"
+    ]
+  },
+  "main": "src/function.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ehacke/cloud-run-vs-cloud-functions-processes.git"
+  },
+  "scripts": {
+    "deploy:function": "gcloud functions deploy subprocess --runtime nodejs12 --trigger-http --allow-unauthenticated --memory=2048MB --source src",
+    "lint": "fixpack && prettier-eslint --write && eslint --fix \"**/*.{js,ts}\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

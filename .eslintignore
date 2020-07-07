@@ -1,0 +1,9 @@
+.nyc_output/**
+node_modules/**
+images/**
+coverage/**
+dist/
+src/commands/templates/*
+tests/resources/*
+scratch.*
+tests/output/*
