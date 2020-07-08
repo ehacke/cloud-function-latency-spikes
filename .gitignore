@@ -102,3 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+src/loadTheLibs
+function.out
+run.out
