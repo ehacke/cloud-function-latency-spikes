@@ -4,7 +4,7 @@ const { times } = require('lodash');
 const reserved = require('reserved-words');
 const fs = require('fs-extra');
 
-const MAX_FILES = 500;
+const MAX_FILES = 1000;
 let counter = 0;
 
 /**
