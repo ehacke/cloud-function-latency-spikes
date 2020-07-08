@@ -5,7 +5,7 @@ exports.subprocess = (req, res) => {
 
   console.log('Before mocha');
   // eslint-disable-next-line no-process-env
-  execSync('sleep 0.5', { stdio: 'inherit', env: { PATH: process.env.PATH, DEBUG: 'mocha*' } });
+  execSync('./node_modules/nodehog/bin.js cpu 500 1 1', { stdio: 'inherit', env: { PATH: process.env.PATH } });
 
   const duration = Date.now() - start;
   console.log(`Execution: ${duration} ms`);

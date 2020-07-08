@@ -50,6 +50,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "mocha": "^8.0.1"
+    "mocha": "^8.0.1",
+    "nodehog": "^0.1.2"
   }
 }
