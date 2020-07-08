@@ -5,7 +5,7 @@ const got = require('got');
 console.log('Starting');
 
 let counter = 0;
-const MAX_COUNT = 60 * 10;
+const MAX_COUNT = 60 * 20;
 const OUTPUT_PATH = path.join(__dirname, '../function.out');
 
 const interval = setInterval(async () => {
@@ -26,4 +26,4 @@ const interval = setInterval(async () => {
   const { duration } = await got('https://us-central1-asserted-dev.cloudfunctions.net/subprocess').json();
   console.log(`Request: ${requestId} duration: ${duration}`);
   await fs.appendFile(OUTPUT_PATH, `${duration}\n`, 'utf8');
-}, 1000);
+}, 1200);
