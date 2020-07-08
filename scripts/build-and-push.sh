@@ -36,14 +36,13 @@ require_clean_work_tree () {
 
 require_clean_work_tree
 
-PACKAGE_VERSION=$(cat package.json | jq .version -r)
-NAME="ehacke/subprocess"
+NAME="subprocess"
 suffix=$(git rev-parse --short HEAD)
 
 docker pull node:12
 
 latestTag="gcr.io/${CLOUDSDK_CORE_PROJECT}/${NAME}:latest"
-tag="gcr.io/${CLOUDSDK_CORE_PROJECT}/${NAME}:${PACKAGE_VERSION}${suffix}"
+tag="gcr.io/${CLOUDSDK_CORE_PROJECT}/${NAME}:${suffix}"
 
 echo "Building and pushing ${tag}"
 

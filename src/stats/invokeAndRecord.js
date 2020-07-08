@@ -1,4 +1,4 @@
-const fs = require('fs').promises;
+const fs = require('fs-extra');
 const got = require('got');
 
 console.log('Starting');
@@ -14,30 +14,38 @@ const MAX_COUNT = 60 * 20;
  *
  *
  * @param {string} url
- * @param {boolean} generate
+ * @param {string} type
  * @param {string} outputPath
+ * @param {number} timeoutMs
  * @returns {void}
  */
-const start = (url, generate, outputPath) => {
-  const interval = setInterval(async () => {
-    if (counter >= MAX_COUNT) {
-      await fs.appendFile(outputPath, 'end\n', 'utf8');
-      clearInterval(interval);
-      console.log('Done');
-      // eslint-disable-next-line no-process-exit,unicorn/no-process-exit
-      process.exit(0);
-    }
+const start = async (url, type, outputPath, timeoutMs) => {
+  outputPath += `-${type}.out`;
 
-    if (counter === 0) {
-      await fs.appendFile(outputPath, 'start\n', 'utf8');
-    }
+  if (fs.existsSync(outputPath)) {
+    fs.removeSync(outputPath);
+  }
 
-    const requestId = counter++;
+  return new Promise((resolve) => {
+    const interval = setInterval(async () => {
+      if (counter >= MAX_COUNT) {
+        await fs.appendFile(outputPath, 'end\n', 'utf8');
+        clearInterval(interval);
+        console.log('Done');
+        resolve();
+      }
 
-    const { duration } = await got(`${url}?generate=${generate}`).json();
-    console.log(`Request: ${requestId} duration: ${duration}`);
-    await fs.appendFile(outputPath, `${duration}\n`, 'utf8');
-  }, 2000);
+      if (counter === 0) {
+        await fs.appendFile(outputPath, 'start\n', 'utf8');
+      }
+
+      const requestId = counter++;
+
+      const { duration } = await got(`${url}?type=${type}`).json();
+      console.log(`Request: ${requestId} duration: ${duration}`);
+      await fs.appendFile(outputPath, `${duration}\n`, 'utf8');
+    }, timeoutMs);
+  });
 };
 
 module.exports = { start };

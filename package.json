@@ -7,9 +7,11 @@
     "url": "https://github.com/ehacke/cloud-run-vs-cloud-functions-processes/issues"
   },
   "dependencies": {
+    "boolean": "^3.0.1",
     "faker": "^4.1.0",
     "fs-extra": "^9.0.1",
     "lodash": "^4.17.17",
+    "nodehog": "^0.1.2",
     "reserved-words": "^0.1.2"
   },
   "devDependencies": {
@@ -17,10 +19,12 @@
     "@ehacke/prettier-config": "^1.0.2",
     "@typescript-eslint/eslint-plugin": "^3.4.0",
     "@typescript-eslint/parser": "^3.4.0",
+    "dotenv": "^8.2.0",
     "eslint": "7.2.0",
     "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-simple-import-sort": "^5.0.3",
     "fixpack": "^3.0.6",
+    "getenv": "^1.0.0",
     "got": "^11.5.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
@@ -53,7 +57,11 @@
   "scripts": {
     "build": "node src/lib/generate.js",
     "deploy:function": "npm run build && gcloud functions deploy subprocess --runtime nodejs12 --trigger-http --allow-unauthenticated --memory=512MB",
+    "deploy:local": "./scripts/build-and-run.sh",
     "deploy:run": "npm run build && ./scripts/build-and-push.sh",
-    "lint": "fixpack && prettier-eslint --write && eslint --fix \"**/*.{js,ts}\""
+    "lint": "fixpack && prettier-eslint --write && eslint --fix \"**/*.{js,ts}\"",
+    "results:function": "node src/stats/functionResults.js",
+    "results:local": "node src/stats/localResults.js",
+    "results:run": "node src/stats/runResults.js"
   }
 }

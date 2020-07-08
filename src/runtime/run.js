@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 const app = http.createServer((req, res) => {
   const { query = {} } = url.parse(req.url, true) || {};
 
-  const duration = exec(query.generate || false);
+  const duration = exec(query.type);
 
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify({ duration }));

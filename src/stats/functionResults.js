@@ -1,6 +1,15 @@
 const path = require('path');
+const getenv = require('getenv');
 const { start } = require('./invokeAndRecord');
+require('dotenv').config();
 
-const OUTPUT_PATH = path.join(__dirname, '../function.out');
+(async () => {
+  const OUTPUT_PATH = path.join(__dirname, '../function');
 
-start('https://us-central1-asserted-dev.cloudfunctions.net/subprocess', false, OUTPUT_PATH);
+  await start(getenv('CLOUD_FUNCTION_URL'), 'load', OUTPUT_PATH, 1000);
+  await start(getenv('CLOUD_FUNCTION_URL'), 'hog', OUTPUT_PATH, 1000);
+  await start(getenv('CLOUD_FUNCTION_URL'), 'regenerate', OUTPUT_PATH, 1000);
+
+  // eslint-disable-next-line no-process-exit,unicorn/no-process-exit
+  process.exit(0);
+})();

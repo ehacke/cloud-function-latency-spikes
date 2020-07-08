@@ -7,9 +7,8 @@ const { exec } = require('./exec');
  * @param res
  */
 exports.subprocess = (req, res) => {
-  const { generate = false } = req.query || {};
-
-  const duration = exec(generate);
+  const { type } = req.query || {};
+  const duration = exec(type);
 
   res.status(200).json({ duration });
 };

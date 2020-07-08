@@ -1,7 +1,6 @@
 FROM node:12
 
 ENV NODE_ENV production
-ENV UV_THREADPOOL_SIZE 10
 ENV PORT 3000
 
 # App install
@@ -14,4 +13,4 @@ RUN npm install --production
 
 COPY ./src src/
 
-CMD ["node", "src/run.js"]
+CMD ["node", "src/runtime/run.js"]
