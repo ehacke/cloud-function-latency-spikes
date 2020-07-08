@@ -6,6 +6,10 @@
   "bugs": {
     "url": "https://github.com/ehacke/cloud-run-vs-cloud-functions-processes/issues"
   },
+  "dependencies": {
+    "mocha": "^8.0.1",
+    "nodehog": "^0.1.2"
+  },
   "devDependencies": {
     "@ehacke/eslint-config": "^1.1.6",
     "@ehacke/prettier-config": "^1.0.2",
@@ -45,12 +49,8 @@
     "url": "git+https://github.com/ehacke/cloud-run-vs-cloud-functions-processes.git"
   },
   "scripts": {
-    "deploy:function": "gcloud functions deploy subprocess --runtime nodejs12 --trigger-http --allow-unauthenticated --memory=2048MB",
+    "deploy:function": "gcloud functions deploy subprocess --runtime nodejs12 --trigger-http --allow-unauthenticated --memory=512MB",
     "lint": "fixpack && prettier-eslint --write && eslint --fix \"**/*.{js,ts}\"",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
-    "mocha": "^8.0.1",
-    "nodehog": "^0.1.2"
   }
 }
