@@ -4,7 +4,7 @@ const got = require('got');
 console.log('Starting');
 
 let counter = 0;
-const MAX_COUNT = 60 * 20;
+const MAX_COUNT = 500;
 
 /**
  * This will:
