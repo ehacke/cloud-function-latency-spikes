@@ -26,4 +26,4 @@ const interval = setInterval(async () => {
   const { duration } = await got('https://us-central1-asserted-dev.cloudfunctions.net/subprocess').json();
   console.log(`Request: ${requestId} duration: ${duration}`);
   await fs.appendFile(OUTPUT_PATH, `${duration}\n`, 'utf8');
-}, 1200);
+}, 2000);

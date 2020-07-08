@@ -8,7 +8,7 @@ const app = http.createServer((req, res) => {
   const start = Date.now();
 
   // eslint-disable-next-line no-process-env
-  execSync('./node_modules/nodehog/bin.js cpu 500 1 1', { stdio: 'inherit', env: { PATH: process.env.PATH } });
+  execSync('./node_modules/mocha/bin/mocha **/*.unit.js', { stdio: 'inherit', env: { PATH: process.env.PATH } });
 
   const duration = Date.now() - start;
   console.log(`Execution: ${duration} ms`);

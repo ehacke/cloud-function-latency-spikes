@@ -10,7 +10,7 @@ const OUTPUT_PATH = path.join(__dirname, '../run.out');
 
 const interval = setInterval(async () => {
   if (counter >= MAX_COUNT) {
-    await fs.writeFile(OUTPUT_PATH, 'end\n', 'utf8');
+    await fs.appendFile(OUTPUT_PATH, 'end\n', 'utf8');
     clearInterval(interval);
     console.log('Done');
     // eslint-disable-next-line no-process-exit
@@ -18,12 +18,12 @@ const interval = setInterval(async () => {
   }
 
   if (counter === 0) {
-    await fs.writeFile(OUTPUT_PATH, 'start\n', 'utf8');
+    await fs.appendFile(OUTPUT_PATH, 'start\n', 'utf8');
   }
 
   const requestId = counter++;
 
   const { duration } = await got('https://subprocess-qab4oyrtea-uc.a.run.app/subprocess').json();
   console.log(`Request: ${requestId} duration: ${duration}`);
-  await fs.writeFile(OUTPUT_PATH, `${duration}\n`, 'utf8');
-}, 1200);
+  await fs.appendFile(OUTPUT_PATH, `${duration}\n`, 'utf8');
+}, 2000);
