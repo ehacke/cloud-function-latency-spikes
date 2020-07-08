@@ -4,7 +4,7 @@ const { times } = require('lodash');
 const reserved = require('reserved-words');
 const fs = require('fs-extra');
 
-const MAX_FILES = 800;
+const MAX_FILES = 1500;
 let counter = 0;
 
 /**
@@ -43,7 +43,7 @@ const createFakeLibraries = (outputPath) => {
       return _content;
     }, {});
 
-    const filename = faker.lorem.word();
+    const filename = faker.lorem.word() + counter;
 
     // Make sure we don't accidentally create a reserved name
     if (reserved.check(filename)) {
