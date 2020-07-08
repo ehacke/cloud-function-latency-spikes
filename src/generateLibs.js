@@ -3,8 +3,9 @@ const faker = require('faker');
 const { times } = require('lodash');
 const reserved = require('reserved-words');
 const fs = require('fs-extra');
+const os = require('os');
 
-const OUTPUT_PATH = path.join(__dirname, './loadTheLibs');
+const OUTPUT_PATH = path.join(os.tmpdir(), './loadTheLibs');
 
 const MAX_FILES = 500;
 
@@ -48,12 +49,16 @@ const createFiles = () => {
   }
 };
 
-fs.removeSync(OUTPUT_PATH);
+if (fs.pathExistsSync(OUTPUT_PATH)) {
+  fs.removeSync(OUTPUT_PATH);
+}
+
 fs.ensureDirSync(OUTPUT_PATH);
 createFiles();
 
 let indexString = '';
 
+// eslint-disable-next-line array-callback-return
 [...filenames].map((filename) => {
   indexString += `const ${filename} = require('./${filename}.js');\n`;
 });
