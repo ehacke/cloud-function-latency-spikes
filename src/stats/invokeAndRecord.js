@@ -3,7 +3,6 @@ const got = require('got');
 
 console.log('Starting');
 
-let counter = 0;
 const MAX_COUNT = 500;
 
 /**
@@ -20,6 +19,7 @@ const MAX_COUNT = 500;
  * @returns {void}
  */
 const start = async (url, type, outputPath, timeoutMs) => {
+  let counter = 0;
   outputPath += `-${type}.out`;
 
   if (fs.existsSync(outputPath)) {

@@ -56,7 +56,7 @@
   },
   "scripts": {
     "build": "node src/lib/generate.js",
-    "deploy:function": "npm run build && gcloud functions deploy subprocess --runtime nodejs12 --trigger-http --allow-unauthenticated --memory=512MB",
+    "deploy:function": "npm run build && gcloud functions deploy subprocess --runtime nodejs12 --trigger-http --allow-unauthenticated --memory=2048MB",
     "deploy:local": "./scripts/build-and-run.sh",
     "deploy:run": "npm run build && ./scripts/build-and-push.sh",
     "lint": "fixpack && prettier-eslint --write && eslint --fix \"**/*.{js,ts}\"",
