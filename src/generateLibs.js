@@ -1,8 +1,8 @@
 const path = require('path');
-const fs = require('fs');
 const faker = require('faker');
 const { times } = require('lodash');
 const reserved = require('reserved-words');
+const fs = require('fs-extra');
 
 const OUTPUT_PATH = path.join(__dirname, './loadTheLibs');
 
@@ -48,6 +48,8 @@ const createFiles = () => {
   }
 };
 
+fs.removeSync(OUTPUT_PATH);
+fs.ensureDirSync(OUTPUT_PATH);
 createFiles();
 
 let indexString = '';
@@ -59,3 +61,8 @@ let indexString = '';
 indexString += `module.exports = { ${[...filenames].join(', ')} }`;
 
 fs.writeFileSync(path.join(OUTPUT_PATH, 'index.js'), indexString);
+
+// eslint-disable-next-line import/no-dynamic-require
+require(path.join(OUTPUT_PATH, 'index.js'));
+
+fs.removeSync(OUTPUT_PATH);

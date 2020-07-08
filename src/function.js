@@ -5,7 +5,7 @@ exports.subprocess = (req, res) => {
 
   console.log('Before loading');
   // eslint-disable-next-line no-process-env
-  execSync('echo "foo"; node src/loadTheLibs/index.js', { stdio: 'inherit', env: { PATH: process.env.PATH } });
+  execSync('echo "foo"; node src/generateLibs.js', { stdio: 'inherit', env: { PATH: process.env.PATH } });
 
   const duration = Date.now() - start;
   console.log(`Execution: ${duration} ms`);
