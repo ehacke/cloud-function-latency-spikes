@@ -29,14 +29,9 @@ const start = async (url, type, outputPath, timeoutMs) => {
   return new Promise((resolve) => {
     const interval = setInterval(async () => {
       if (counter >= MAX_COUNT) {
-        await fs.appendFile(outputPath, 'end\n', 'utf8');
         clearInterval(interval);
         console.log('Done');
         resolve();
-      }
-
-      if (counter === 0) {
-        await fs.appendFile(outputPath, 'start\n', 'utf8');
       }
 
       const requestId = counter++;
