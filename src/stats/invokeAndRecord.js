@@ -3,7 +3,7 @@ const got = require('got');
 
 console.log('Starting');
 
-const MAX_COUNT = 500;
+const MAX_COUNT = 1000;
 
 /**
  * This will:
