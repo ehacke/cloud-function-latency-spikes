@@ -45,16 +45,15 @@
       "eslint --fix"
     ]
   },
-  "main": "src/function.js",
+  "main": "src/runtime/function.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ehacke/cloud-run-vs-cloud-functions-processes.git"
   },
   "scripts": {
-    "deploy:function": "gcloud functions deploy subprocess --runtime nodejs12 --trigger-http --allow-unauthenticated --memory=512MB",
-    "deploy:run": "./scripts/build-and-push.sh",
-    "build": "node src/generateLibs.js",
-    "lint": "fixpack && prettier-eslint --write && eslint --fix \"**/*.{js,ts}\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node src/lib/generate.js",
+    "deploy:function": "npm run build && gcloud functions deploy subprocess --runtime nodejs12 --trigger-http --allow-unauthenticated --memory=512MB",
+    "deploy:run": "npm run build && ./scripts/build-and-push.sh",
+    "lint": "fixpack && prettier-eslint --write && eslint --fix \"**/*.{js,ts}\""
   }
 }
