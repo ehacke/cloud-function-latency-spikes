@@ -9,7 +9,5 @@ require('dotenv').config();
   await start(getenv('CLOUD_FUNCTION_URL'), 'load', OUTPUT_PATH, 4000);
   await start(getenv('CLOUD_FUNCTION_URL'), 'hog', OUTPUT_PATH, 2000);
   await start(getenv('CLOUD_FUNCTION_URL'), 'regenerate', OUTPUT_PATH, 6000);
-
-  // eslint-disable-next-line no-process-exit,unicorn/no-process-exit
-  process.exit(0);
+  console.log('Done all for function');
 })();
