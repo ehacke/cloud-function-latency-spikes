@@ -60,8 +60,8 @@
     "deploy:local": "./scripts/build-and-run.sh",
     "deploy:run": "npm run build && ./scripts/build-and-push.sh",
     "lint": "fixpack && prettier-eslint --write && eslint --fix \"**/*.{js,ts}\"",
-    "results:function": "node src/stats/functionResults.js",
-    "results:local": "node src/stats/localResults.js",
-    "results:run": "node src/stats/runResults.js"
+    "run:function": "node src/run/functionResults.js",
+    "run:local": "node src/run/localResults.js",
+    "run:run": "node src/run/runResults.js"
   }
 }
