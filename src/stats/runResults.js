@@ -4,7 +4,7 @@ const { start } = require('./invokeAndRecord');
 require('dotenv').config();
 
 (async () => {
-  const OUTPUT_PATH = path.join(__dirname, '../run');
+  const OUTPUT_PATH = path.join(__dirname, '../results/run');
 
   await start(getenv('CLOUD_RUN_URL'), 'load', OUTPUT_PATH, 4000);
   await start(getenv('CLOUD_RUN_URL'), 'hog', OUTPUT_PATH, 2000);

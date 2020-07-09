@@ -25,6 +25,8 @@ const start = async (url, type, outputPath, timeoutMs) => {
   if (fs.existsSync(outputPath)) {
     fs.removeSync(outputPath);
   }
+  
+  fs.ensureFile(outputPath);
 
   return new Promise((resolve) => {
     const interval = setInterval(async () => {
