@@ -1,0 +1,67 @@
+{
+  "name": "cloud-run-vs-cloud-functions-processes",
+  "description": "How child processes are handled in Cloud Run compared to Cloud Functions",
+  "version": "0.0.1",
+  "author": "Eric Hacke",
+  "bugs": {
+    "url": "https://github.com/ehacke/cloud-run-vs-cloud-functions-processes/issues"
+  },
+  "dependencies": {
+    "boolean": "^3.0.1",
+    "faker": "^4.1.0",
+    "fs-extra": "^9.0.1",
+    "lodash": "^4.17.17",
+    "nodehog": "^0.1.2",
+    "reserved-words": "^0.1.2"
+  },
+  "devDependencies": {
+    "@ehacke/eslint-config": "^1.1.6",
+    "@ehacke/prettier-config": "^1.0.2",
+    "@typescript-eslint/eslint-plugin": "^3.4.0",
+    "@typescript-eslint/parser": "^3.4.0",
+    "dotenv": "^8.2.0",
+    "eslint": "7.2.0",
+    "eslint-import-resolver-typescript": "^2.0.0",
+    "eslint-plugin-simple-import-sort": "^5.0.3",
+    "fixpack": "^3.0.6",
+    "getenv": "^1.0.0",
+    "got": "^11.5.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5",
+    "prettier-eslint-cli": "^5.0.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5"
+  },
+  "homepage": "https://github.com/ehacke/cloud-run-vs-cloud-functions-processes#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "license": "MIT",
+  "lint-staged": {
+    "package.json": [
+      "fixpack"
+    ],
+    "*.{js,ts}": [
+      "prettier-eslint --write",
+      "eslint --fix"
+    ]
+  },
+  "main": "src/runtime/function.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ehacke/cloud-run-vs-cloud-functions-processes.git"
+  },
+  "scripts": {
+    "build": "node src/lib/generate.js",
+    "deploy:function": "npm run build && gcloud functions deploy subprocess --runtime nodejs12 --trigger-http --allow-unauthenticated --memory=2048MB",
+    "deploy:local": "./scripts/build-and-run.sh",
+    "deploy:run": "npm run build && ./scripts/build-and-push.sh",
+    "lint": "fixpack && prettier-eslint --write && eslint --fix \"**/*.{js,ts}\"",
+    "run:function": "node src/run/functionResults.js",
+    "run:local": "node src/run/localResults.js",
+    "run:run": "node src/run/runResults.js"
+  }
+}
